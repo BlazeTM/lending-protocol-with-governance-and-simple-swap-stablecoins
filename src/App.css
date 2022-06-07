@@ -1,15 +1,29 @@
 .App {
   text-align: center;
+  background-color: beige;
 }
 
 .navbar {
   display: inline-flex;
   word-spacing: 10px;
   position: relative;
-  
+  background-color: gray;
+  width: 1080px;
+  height: 60px;
 }
 
 .nav {
   padding: 25px;
-  left: -5px;
+
+}
+
+.DAI {
+  display: inline-flex;
+  word-spacing: 10px;
+  position: relative;
+}
+
+.Content {
+  height: 1920px;
+  width: 1080px;
 }

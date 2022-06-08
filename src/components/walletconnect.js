@@ -1,5 +1,5 @@
 import React from "react";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { Button } from '@mui/material';
 
 const WalletConnect = ({ accounts, setAccounts, balanceOfDai, setBalanceOfDai, balanceOfStakedDai, setBalanceOfStakedDai, isAllowed}) => {
@@ -21,11 +21,6 @@ const WalletConnect = ({ accounts, setAccounts, balanceOfDai, setBalanceOfDai, b
         balanceOfDai = ethers.utils.formatUnits(balanceOfDai, 18);
         balanceOfDai = parseFloat(balanceOfDai).toFixed(2);
         setBalanceOfDai(balanceOfDai);
-        const isAllowedCheck = daiContract.allowance(accounts[0], VaultAddress);
-        const isAllowed = Boolean(false);
-        if(isAllowedCheck > 0) {
-            isAllowed = Boolean(true);
-        }
         balanceOfStakedDai = await vaultContract.BalanceOfStakedDai(userAddress);
         balanceOfStakedDai = ethers.utils.formatUnits(balanceOfStakedDai, 0 );
         setBalanceOfStakedDai(balanceOfStakedDai);

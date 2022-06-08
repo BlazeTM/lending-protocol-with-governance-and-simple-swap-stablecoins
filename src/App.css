@@ -20,10 +20,17 @@
 .DAI {
   display: inline-flex;
   word-spacing: 10px;
-  position: relative;
+  position: absolute;
+  height: 1920px;
+  width: 1780px;
 }
 
 .Content {
   height: 1920px;
+  position: relative;
   width: 1080px;
+}
+
+.daicontent {
+  padding : 25px;
 }

@@ -1,4 +1,5 @@
 #Site is available on https://lending-protocol-with-governance-and-simple-swap-250kjp4hp.vercel.app/
+use this metamask chain https://chainlist.org/chain/941
 
 # Getting Started with Create React App
 

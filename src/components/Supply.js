@@ -1,11 +1,6 @@
 import React from "react";
 import { ethers, BigNumber } from "ethers";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
+
 
 
 
@@ -18,7 +13,7 @@ const DaiAbi = '[{"inputs":[{"internalType":"uint256","name":"chainId_","type":"
 
 
 
-const ButtonsSupplyAndWithdraw = ({ accounts, setAccounts, balanceOfDai, inputs, isAllowed}) =>  {
+const ButtonsSupplyAndWithdraw = ({ accounts, setAccounts, balanceOfDai, inputs}) =>  {
     const DaiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
     const VaultAddress = "0x8e531f32A9a950f6E1bd40F1dfC18F40272F430D";
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -82,34 +77,17 @@ const ButtonsSupplyAndWithdraw = ({ accounts, setAccounts, balanceOfDai, inputs,
         const handleChange = (prop) => (event) => {
             setValues({ ...values, [prop]: event.target.value });
           };
+          function withdrawAll(){
+            const vaultContract = new ethers.Contract(VaultAddress, vaultAbi, signer) ;
+            vaultContract.withdrawAll({
+              gasLimit: 10000000,
+            });
     return(
-        <div className="daicontent">
-                <div>
-      <Button variant="contained" onClick={handleOpen}>Supply</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div>
-              <Button onClick={supplyButton} >Supply</Button>
-              <Button onClick={withdrawButton} >Withdraw</Button>
-          </div>
-          
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            value={values.amount}
-            onChange={handleChange('amount')}
-            startAdornment={<InputAdornment position="start">DAI</InputAdornment>}
-            label="Amount"
-          />
-        </Box>
-      </Modal>
-    </div>
+        <div>
+          <button onClick={withdrawAll} className="text-white/90 h-11 w-40 rounded-full bg-red-500/75 text-lg p-2 text-center shadow hover:shadow-lg"><p className=" mb-12 ">Connect Wallet</p></button>
         </div>
     )
-};
+}
 
+}
 export default ButtonsSupplyAndWithdraw;

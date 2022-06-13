@@ -2,8 +2,6 @@
 import '../App.css';
 import React from 'react';
 import { ethers,BigNumber} from "ethers";
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
 import img from '../arrow.png';
 
 
@@ -14,6 +12,7 @@ const swapAbi = '[ { "inputs": [ { "internalType": "uint256", "name": "_fee", "t
 const DaiAbi = '[{"inputs":[{"internalType":"uint256","name":"chainId_","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"src","type":"address"},{"indexed":true,"internalType":"address","name":"guy","type":"address"},{"indexed":false,"internalType":"uint256","name":"wad","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":true,"inputs":[{"indexed":true,"internalType":"bytes4","name":"sig","type":"bytes4"},{"indexed":true,"internalType":"address","name":"usr","type":"address"},{"indexed":true,"internalType":"bytes32","name":"arg1","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"arg2","type":"bytes32"},{"indexed":false,"internalType":"bytes","name":"data","type":"bytes"}],"name":"LogNote","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"src","type":"address"},{"indexed":true,"internalType":"address","name":"dst","type":"address"},{"indexed":false,"internalType":"uint256","name":"wad","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"guy","type":"address"}],"name":"deny","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"mint","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"move","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"holder","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"bool","name":"allowed","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"pull","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"push","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"guy","type":"address"}],"name":"rely","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"version","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"wards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]';
 
 const USDCABI = '[{"constant":false,"inputs":[{"name":"newImplementation","type":"address"}],"name":"upgradeTo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newImplementation","type":"address"},{"name":"data","type":"bytes"}],"name":"upgradeToAndCall","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"implementation","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newAdmin","type":"address"}],"name":"changeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_implementation","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"previousAdmin","type":"address"},{"indexed":false,"name":"newAdmin","type":"address"}],"name":"AdminChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"implementation","type":"address"}],"name":"Upgraded","type":"event"}]';
+
 
 
 function swaps({accounts, setAccounts, isDai, setIsDai,secondStable, setSecondStable, firstStable, setFirstStable, value, setValue, value1, setValue1, stable, setStable}) {
@@ -30,7 +29,18 @@ function swaps({accounts, setAccounts, isDai, setIsDai,secondStable, setSecondSt
     console.log(signer);
     const isConnected = Boolean(accounts[0]);
 
-
+    async function ConnectWallet() {
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      const { chainId } = await provider.getNetwork();
+      console.log(chainId); // 941
+      if(chainId == 941){
+      accounts = await provider.send('eth_requestAccounts',[])
+      setAccounts(accounts);
+      } else {
+          alert("Change network to Pulsechain v2b");
+      }
+  
+  }
 
     function swap(){
       if(1 === 1){
@@ -73,38 +83,51 @@ function swaps({accounts, setAccounts, isDai, setIsDai,secondStable, setSecondSt
     }
     
 
-    const onChange = (event) => {
+    const onChangeSwap = (event) => {
         const value = event.target.value;
         setValue(value)
         const value1 = value - (value *20/10000);
         setValue1(value1)
       }
+    const onChangeLiquidity = (event) => {
+        const value = event.target.value;
+        setValue(value)
+        const value1 = value;
+        setValue1(value1)
+    }
 
   
     return (
-        <div className='ml-40 mt-20 '>
-          <div className='rounded-lg p-2   h-60   w-80  bg-gray-400	'>
+        <div className='p-20 ml-20'>
+          <div className='p-40 ml-40'>
+          <div className='p-4 ml-80 rounded-lg    h-80   w-80 bg-second-bg-color  absolute	'>
+          <div className='p-2 mb-4 flex'>
+            <button className='text-white/90 h-8 w-60 rounded-full bg-button2 ml-2 text-lg shadow hover:shadow-lg' >Exchange</button>
+            <button className='text-white/90 h-8 w-60 rounded-full bg-button2 ml-2 text-lg shadow hover:shadow-lg' >Liqiudity</button>
+          </div>
+
+          <div className='flex  rounded-lg bg-blackmy/50 text-white/90 w-70 h-12 outline-none  p-2'>
+            <input onChange={onChangeSwap} value={value} className="bg-transparent text-white/90 w-60 h-8 outline-none  p-2"/>
+            <button className='text-white/90  rounded-full bg-button2 w-20 h-8 ml-1'>{firstStable}</button>
+            </div>
+          <div className='mt-3 ml-20 mb-3'><img className='h-6 ml-12' src={img}></img></div> 
+            <div className='flex  rounded-lg bg-blackmy/50 text-white/90 w-70 h-12 outline-none  p-2 '>
+            <input value={value1} className="rounded-lg bg-transparent text-white/90 w-60 h-8 outline-none  p-2"/>
+            <button className='text-white/90  rounded-full bg-button2 w-20 h-8 ml-1 '>{secondStable}</button>
+            </div>
            
-          <div className='flex  mr-0 mt-4 ml-4 '>
-            <input onChange={onChange} value={value} className="rounded-lg bg-gray-800/90 text-white/90 w-60 h-8 outline-none  p-2"/>
-            <button className='text-white/90  rounded-full bg-red-400 w-20 h-8 ml-1'>{firstStable}</button>
-            </div>
-          <div className='mt-3'><img className='h-6 ml-20' src={img}></img></div> 
-            <div className='flex mt-4 mr-0 ml-4 justify-between'>
-            <input value={value1} className="rounded-lg bg-gray-800/90 text-white/90 w-60 h-8 outline-none  p-2"/>
-            <button className='text-white/90  rounded-full bg-red-400 w-20 h-8 ml-1 '>{secondStable}</button>
-            </div>
 
-          
+          {isConnected ? (
           <div className='p-4 mt-6 flex '>
-          
-          
-
-          
-            <button className="text-white/90 h-8 w-60 rounded-full bg-red-500/75 text-lg shadow hover:shadow-lg "  onClick={swapDai}>Swap</button>
-          
-            <button className='text-white/90 h-8 w-60 rounded-full bg-red-500/75 ml-2 text-lg shadow hover:shadow-lg' onClick={addLiqiudity}>Add Liqiudity</button>
+            <button className="text-white/90 h-8 w-60 rounded-full bg-button2 text-lg shadow hover:shadow-lg "  onClick={swapDai}>Swap</button>
             
+            <button className='text-white/90 h-8 w-60 rounded-full bg-button2 ml-2 text-lg shadow hover:shadow-lg' onClick={addLiqiudity}>Add Liqiudity</button>
+          </div>
+          ) : (
+            <div className='p-4 mt-6 flex '>
+            <button onClick={ConnectWallet} className="text-white/90 h-10 w-60 rounded-full bg-button2 text-lg">Connect Wallet</button>
+            </div>
+          )}
           </div>
           </div>
           </div>

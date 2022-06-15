@@ -10,6 +10,8 @@ module.exports = {
         '440px': '440px',
         '600px': '600px',
         '700px': '610px',
+        '725px': '725px',
+        '750px': '825px',
       },
       colors: {
         'blackmy': '#7858A6',

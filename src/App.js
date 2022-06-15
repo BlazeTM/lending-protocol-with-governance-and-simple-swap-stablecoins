@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './App.css';
 import NavBar from "./components/navBar"; //navbar
 import React from 'react';
@@ -6,6 +6,7 @@ import SWAPS from './components/swaps.js';
 import Governance from "./components/governance.js";
 import Lending from './components/lending.js'
 import Dai from "./components/DAI.webp";
+import Proposals from "./components/governance.js";
 
 
 
@@ -22,6 +23,9 @@ function App() {
   const [isLiquidity, setIsLiquidity] = useState(Boolean(false));
   const [balanceOfDai, setBalanceOfDai] = useState(0);
   const [balanceOfStakedDai, setBalanceOfStakedDai] = useState(0);
+  const trueis = Boolean(localStorage.getItem('account'));
+
+  
 
   
 
@@ -71,14 +75,13 @@ function App() {
         <div></div>
       )}
       {isGovernance ? (
-        <Governance/>
+        <div className="mx-auto"><Governance/></div>
       ) : (
         <div></div>
       )}
 
       </div>
-    </div>
-      
+      </div>
 
   );
 }

@@ -28,6 +28,9 @@ function navBar({isLending, setIsLending, isSwaps, setIsSwaps, isGovernance, set
     const usdcContract = new ethers.Contract(usdcAddress, DaiAbi, signer);
     const vaultContract = new ethers.Contract(VaultAddress, vaultAbi, signer);
     const address = signer.getAddress;
+    /*if(JSON.parse(localStorage.getItem('account')) != undefined) {
+        setAccounts(JSON.parse(localStorage.getItem('account')))
+      }*/
 
     async function connectWallet() {
         const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -43,6 +46,7 @@ function navBar({isLending, setIsLending, isSwaps, setIsSwaps, isGovernance, set
         balanceOfStakedDai = ethers.utils.formatUnits(balanceOfStakedDai,0);
         setBalanceOfDai(balanceOfDai);
         setBalanceOfStakedDai(balanceOfStakedDai);
+        localStorage.setItem('account', JSON.stringify(accounts[0]));
         } else {
             alert("Change network to Pulsechain v2b");
         }
@@ -81,7 +85,7 @@ return(
     <div className=" items-stretch h-15 overflow-hidden justify-between  flex space-x-5" >
         <div className="inline-block rounded-lg bg-button2 text-white/90 w-20 h-8 p-1"><a className="ml-1.5" onClick={Lending}>Lending</a></div>
         <div className="inline-block rounded-lg bg-button2 text-white/90 w-16 h-8 p-1 "><a className="ml-1" onClick={Swaps}>Swaps</a></div>
-        <div className="inline-block rounded-lg bg-button2 text-white/90 w-31 h-8 p-1"><a className="ml-1" onClick={Governance}>Governance</a></div>
+        <div className="inline-block rounded-lg bg-button2 text-white/90 w-31 h-8 p-1"><a className="ml-0.5" onClick={Governance}>Governance</a></div>
 
         
     </div>
